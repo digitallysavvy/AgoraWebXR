@@ -1,11 +1,11 @@
 
 // create client 
-var client = AgoraRTC.createClient({mode: 'live', codec: 'vp8'}); // vp8 to work across mobile devices
+const client = AgoraRTC.createClient({mode: 'live', codec: 'vp8'}); // vp8 to work across mobile devices
 
-var agoraAppId = '4fdfd402ce0a45ea94d850f2124f0b36';
-var channelName = 'WebAR'; 
+const agoraAppId = '4fdfd402ce0a45ea94d850f2124f0b36';
+const channelName = 'WebAR'; 
 var streamCount = 0;
-const parent = document.querySelector('a-marker'); // set as 'a-marker' or 'a-nft'
+const parent = document.querySelector('a-nft'); // set as 'a-marker' or 'a-nft'
 
 // set log level:
 // -- .DEBUG for dev 
@@ -21,8 +21,8 @@ client.init(agoraAppId, () => {
 
 // connect remote streams
 client.on('stream-added', (evt) => {
-  var stream = evt.stream;
-  var streamId = stream.getId();
+  const stream = evt.stream;
+  const streamId = stream.getId();
   console.log('New stream added: ' + streamId);
   console.log('Subscribing to remote stream:' + streamId);
   // Subscribe to the stream.
@@ -32,7 +32,7 @@ client.on('stream-added', (evt) => {
 
   streamCount++;
   // create video element
-  var video = document.createElement('video');
+  const video = document.createElement('video');
   video.id = "faceVideo-" + streamId;
   video.setAttribute('webkit-playsinline', 'webkit-playsinline');
   video.setAttribute('playsinline', 'playsinline');
@@ -40,15 +40,19 @@ client.on('stream-added', (evt) => {
   document.querySelector("a-assets").appendChild(video);
 
   // add the new broadcaster
-  var gltfModel = "#broadcaster";
-  var scale = "-0.55 -0.55 -0.55"; // invert UVs (hack)
-  var offset = (streamCount-1);
-  var position = offset + " 0 0";
-  var rotation = "270 0 0";
-  // var rotation = "90 0 0";
+  const gltfModel = "#broadcaster";
+  // const scale = "-0.55 -0.55 -0.55";
+  const scale = "5 5 5";
+  // const scale = { x: 5, y: 5, z: 5 }
+  const offset = (streamCount-1); // offset used to space out models in the scene
+  const position = offset + " 0 0";
+  // const position = { x: offset, y: 0, z: 0 }
+  const rotation = "270 0 0";
+  // const rotation = { x: 270, y: 0, z: 0 };
 
 
-  var newBroadcaster = document.createElement('a-gltf-model');
+  // var newBroadcaster = document.createElement('a-gltf-model');
+  var newBroadcaster = document.createElement('a-entity');
   newBroadcaster.setAttribute('id', streamId);
   newBroadcaster.setAttribute('gltf-model', gltfModel);
   newBroadcaster.setAttribute('scale', scale);
