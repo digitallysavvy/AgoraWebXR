@@ -2,10 +2,9 @@
 // create client 
 const client = AgoraRTC.createClient({mode: 'live', codec: 'vp8'}); // vp8 to work across mobile devices
 
-const agoraAppId = '4fdfd402ce0a45ea94d850f2124f0b36';
+const agoraAppId = ''; // insert Agora AppID here
 const channelName = 'WebAR'; 
 var streamCount = 0;
-const parent = document.querySelector('a-nft'); // set as 'a-marker' or 'a-nft'
 
 // set log level:
 // -- .DEBUG for dev 
@@ -51,8 +50,9 @@ client.on('stream-added', (evt) => {
   // const rotation = { x: 270, y: 0, z: 0 };
 
 
-  // var newBroadcaster = document.createElement('a-gltf-model');
-  var newBroadcaster = document.createElement('a-entity');
+  const parent = document.querySelector('a-nft'); // set as 'a-marker' or 'a-nft'
+  var newBroadcaster = document.createElement('a-gltf-model');
+  // var newBroadcaster = document.createElement('a-entity');
   newBroadcaster.setAttribute('id', streamId);
   newBroadcaster.setAttribute('gltf-model', gltfModel);
   newBroadcaster.setAttribute('scale', scale);
@@ -82,19 +82,19 @@ client.on('stream-added', (evt) => {
 });
 
 client.on('stream-removed', (evt) => {
-  var stream = evt.stream;
+  const stream = evt.stream;
   stream.stop(); // stop the stream
   stream.close(); // clean up and close the camera stream
   console.log("Remote stream is removed " + stream.getId());
 });
 
 client.on('stream-subscribed', (evt) => {
-  var remoteStream = evt.stream;
-  var remoteId = remoteStream.getId();
+  const remoteStream = evt.stream;
+  const remoteId = remoteStream.getId();
   console.log('Successfully subscribed to remote stream: ' + remoteStream.getId());
   
   // get the designated video element and add the stream as its video source
-  var video = document.getElementById("faceVideo-" + remoteId);
+  const video = document.getElementById("faceVideo-" + remoteId);
   video.srcObject = remoteStream.stream;
   video.onloadedmetadata = () => {
     // video.play();
@@ -107,7 +107,7 @@ client.on('stream-subscribed', (evt) => {
 client.on('peer-leave', (evt) => {
   console.log('Remote stream has left the channel: ' + evt.uid);
   evt.stream.stop(); // stop the stream
-  var remoteId = evt.stream.getId();
+  const remoteId = evt.stream.getId();
   document.getElementById(remoteId).remove();
   document.getElementById("faceVideo-" + remoteId);
   streamCount--;

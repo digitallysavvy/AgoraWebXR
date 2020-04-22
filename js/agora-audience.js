@@ -2,10 +2,9 @@
 // create client 
 var client = AgoraRTC.createClient({mode: 'live', codec: 'vp8'}); // vp8 to work across mobile devices
 
-var agoraAppId = '4fdfd402ce0a45ea94d850f2124f0b36';
-var channelName = 'WebAR'; 
+const agoraAppId = ''; // insert Agora AppID here
+const channelName = 'WebAR'; 
 var streamCount = 0;
-const parent = document.querySelector('a-marker'); // set as 'a-marker' or 'a-nft'
 
 // set log level:
 // -- .DEBUG for dev 
@@ -21,8 +20,8 @@ client.init(agoraAppId, () => {
 
 // connect remote streams
 client.on('stream-added', (evt) => {
-  var stream = evt.stream;
-  var streamId = stream.getId();
+  const stream = evt.stream;
+  const streamId = stream.getId();
   console.log('New stream added: ' + streamId);
   console.log('Subscribing to remote stream:' + streamId);
   // Subscribe to the stream.
@@ -40,14 +39,13 @@ client.on('stream-added', (evt) => {
   document.querySelector("a-assets").appendChild(video);
 
   // add the new broadcaster
-  var gltfModel = "#broadcaster";
-  var scale = "-0.55 -0.55 -0.55"; // invert UVs (hack)
-  var offset = (streamCount-1);
-  var position = offset + " 0 0";
-  var rotation = "270 0 0";
-  // var rotation = "90 0 0";
+  const gltfModel = "#broadcaster";
+  const scale = "-0.55 -0.55 -0.55"; // invert UVs (hack)
+  const offset = (streamCount-1);
+  const position = offset + " 0 0";
+  const rotation = "90 0 0";
 
-
+  const parent = document.querySelector('a-marker');
   var newBroadcaster = document.createElement('a-gltf-model');
   newBroadcaster.setAttribute('id', streamId);
   newBroadcaster.setAttribute('gltf-model', gltfModel);
@@ -78,22 +76,22 @@ client.on('stream-added', (evt) => {
 });
 
 client.on('stream-removed', (evt) => {
-  var stream = evt.stream;
+  const stream = evt.stream;
   stream.stop(); // stop the stream
   stream.close(); // clean up and close the camera stream
   console.log("Remote stream is removed " + stream.getId());
 });
 
 client.on('stream-subscribed', (evt) => {
-  var remoteStream = evt.stream;
-  var remoteId = remoteStream.getId();
+  const remoteStream = evt.stream;
+  const remoteId = remoteStream.getId();
   console.log('Successfully subscribed to remote stream: ' + remoteStream.getId());
   
   // get the designated video element and add the stream as its video source
   var video = document.getElementById("faceVideo-" + remoteId);
   video.srcObject = remoteStream.stream;
   video.onloadedmetadata = () => {
-    // video.play();
+    video.play();
     console.log("::::::: ready to play video ::::::::::::::");
   }
 
@@ -103,7 +101,7 @@ client.on('stream-subscribed', (evt) => {
 client.on('peer-leave', (evt) => {
   console.log('Remote stream has left the channel: ' + evt.uid);
   evt.stream.stop(); // stop the stream
-  var remoteId = evt.stream.getId();
+  const remoteId = evt.stream.getId();
   document.getElementById(remoteId).remove();
   document.getElementById("faceVideo-" + remoteId);
   streamCount--;
@@ -129,7 +127,7 @@ client.on('unmute-video', (evt) => {
 
 // join a channel
 function joinChannel() {
-  var token = generateToken();
+  const token = generateToken();
 
   // set the role
   client.setClientRole('audience', () => {
