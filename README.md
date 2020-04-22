@@ -18,3 +18,6 @@ To run this demo it is recommended to use a desktop device and a mobile device.
 5. Once the camera feed is visible, point the device at the marker to view the **Broadcaster**.
 
 > The `Channel name` is customizable on line 6 of `js/agora-audience.js`, but note that this value must match the value input for the **Broadcast** user
+
+## Experimental ##
+I am still working on the Image Tracking integration. Currently there is an issue with dynamically loading content when using Image markers. For more details see issue :[https://github.com/AR-js-org/AR.js/issues/91](https://github.com/AR-js-org/AR.js/issues/91)
