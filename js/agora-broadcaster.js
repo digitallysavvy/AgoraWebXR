@@ -5,7 +5,7 @@ var client = AgoraRTC.createClient({mode: 'live', codec: 'vp8'}); // vp8 to work
 // video profile settings
 var cameraVideoProfile = '720p_6'; // 960 × 720 @ 30fps  & 750kbs
 
-const agoraAppId = '4fdfd402ce0a45ea94d850f2124f0b36'; // insert Agora AppID here
+const agoraAppId = ''; // insert Agora AppID here
 const channelName = 'WebAR'; 
 var streamCount = 0;
 
