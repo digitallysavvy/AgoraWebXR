@@ -2,7 +2,7 @@
 // create client 
 var client = AgoraRTC.createClient({mode: 'live', codec: 'vp8'}); // vp8 to work across mobile devices
 
-const agoraAppId = ''; // insert Agora AppID here
+const agoraAppId = '4fdfd402ce0a45ea94d850f2124f0b36'; // insert Agora AppID here
 const channelName = 'WebAR'; 
 var streamCount = 0;
 
@@ -43,7 +43,7 @@ client.on('stream-added', (evt) => {
   const scale = "-0.55 -0.55 -0.55"; // invert UVs (hack)
   const offset = (streamCount-1);
   const position = offset + " 0 0";
-  const rotation = "90 0 0";
+  const rotation = "180 0 0";
 
   const parent = document.querySelector('a-marker');
   var newBroadcaster = document.createElement('a-gltf-model');
