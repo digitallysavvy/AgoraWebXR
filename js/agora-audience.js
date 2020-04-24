@@ -43,7 +43,7 @@ client.on('stream-added', (evt) => {
   const scale = "-0.55 -0.55 -0.55"; // invert UVs (hack)
   const offset = (streamCount-1);
   const position = offset + " 0 0";
-  const rotation = "90 0 0";
+  const rotation = "180 0 0";
 
   const parent = document.querySelector('a-marker');
   var newBroadcaster = document.createElement('a-gltf-model');
@@ -137,10 +137,11 @@ function joinChannel() {
   });
   
   client.join(token, channelName, 0, (uid) => {
-      console.log('User ' + uid + ' join channel successfully');
-  }, function(err) {
-      console.log('[ERROR] : join channel failed', err);
-  });
+    console.log('User ' + uid + ' join channel successfully');
+    joinRTMChannel(uid);
+}, function(err) {
+    console.log('[ERROR] : join channel failed', err);
+});
 }
 
 function leaveChannel() {
@@ -151,7 +152,75 @@ function leaveChannel() {
   });
 }
 
+// Agora RTM
+// setup the RTM client and channel
+const rtmClient = AgoraRTM.createInstance(agoraAppId); 
+const rtmChannel = rtmClient.createChannel(channelName); 
+
+rtmClient.on('ConnectionStateChange', (newState, reason) => {
+  console.log('on connection state changed to ' + newState + ' reason: ' + reason);
+});
+
+// event listener for receiving a channel message
+rtmChannel.on('ChannelMessage', ({ text }, senderId) => { 
+  // text: text of the received channel message; senderId: user ID of the sender.
+  console.log('AgoraRTM msg from user ' + senderId + ' recieved: \n' + text);
+
+  var msg = text.split("-");
+  const cmd = msg[0];
+  const state = msg[1];
+  if (cmd === 'rotation') {
+    console.log('cmd found')
+    var model = document.getElementById(senderId);
+    if (state === 'start'){
+      console.log(state + ' : state')
+      const direction = msg[2];
+      rotateModel(model, direction) 
+    } else if (state === 'end') {
+      console.log(state + ' : state')
+      modelRotation = msg[2];
+      model.object3D.rotation.y = modelRotation
+    }
+  }
+
+  // const msg = JSON.parse(text);
+  // const property = msg.property
+  // const attributeValue = msg.attributeValue
+  // console.log(property);
+  // console.log(attributeValue);
+  // var model = document.getElementById(senderId);
+  // // model.object3D[property] = attributeValue
+  // model.setAttribute(property, attributeValue);
+});
+
+function joinRTMChannel(uid){
+  rtmClient.login({ token: null, uid: String(uid) }).then(() => {
+    console.log('AgoraRTM client login success');
+    // join a channel and send a message
+    rtmChannel.join().then(() => {
+      // join-channel success
+      localStreams.rtmActive = true
+      console.log('RTM Channel join success');
+    }).catch(error => {
+      // join-channel failure
+      console.log('failed to join channel for error: ' +  error);
+    });
+  }).catch(err => {
+    console.log('AgoraRTM client login failure', err);
+  });
+}
+
+function rotateModel(model, direction) {
+  if (direction === 'positive') {
+    model.object3D.rotation.y += 0.1;
+  } else if (direction === 'negative') {
+    model.object3D.rotation.y -= 0.1;
+  }  
+}
+
+
 // use tokens for added security
 function generateToken() {
   return null; // TODO: add a token generation
 }
+
