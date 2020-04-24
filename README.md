@@ -1,7 +1,5 @@
 # Agora WebXR
-This is an example of using Agora's Video SDK with WebXR. In this demo you can broadcast yourself from a WebVR environment using Agora with [AFrame](https://github.com/aframevr/aframe), or you can watch a live broadcaster in WebAR using Agora with [AR.js](https://github.com/AR-js-org/AR.js) and [AFrame](https://github.com/aframevr/aframe).
-
-This project implements the [Agora Web SDK](https://docs.agora.io/en/Video/API%20Reference/web/index.html) for the live video streaming, and the [Agora RTM SDK](https://docs.agora.io/en/Real-time-Messaging/API%20Reference/RTM_web/index.html) for the data messaging.
+This is an example of using Agora's Video SDK with WebXR. In this demo you can broadcast yourself from a WebVR environment using [Agora Web SDK](https://docs.agora.io/en/Video/API%20Reference/web/index.html with [AFrame](https://github.com/aframevr/aframe), or you can watch a live broadcaster in WebAR using [Agora Web SDK](https://docs.agora.io/en/Video/API%20Reference/web/index.html with [AR.js](https://github.com/AR-js-org/AR.js) and [AFrame](https://github.com/aframevr/aframe). This project also implements the [Agora RTM SDK](https://docs.agora.io/en/Real-time-Messaging/API%20Reference/RTM_web/index.html) for the data messaging.
 
 ## Quick Start ##
 Clone this repo
