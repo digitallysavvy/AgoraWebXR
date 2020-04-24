@@ -1,4 +1,3 @@
-
 // Agora settings
 const agoraAppId = ''; // insert Agora AppID here
 const channelName = 'WebAR'; 
@@ -45,6 +44,34 @@ rtmClient.on('ConnectionStateChange', (newState, reason) => {
 rtmChannel.on('ChannelMessage', ({ text }, senderId) => { 
   // text: text of the received channel message; senderId: user ID of the sender.
   console.log('AgoraRTM msg from user ' + senderId + ' recieved: \n' + text);
+
+  // const msg = JSON.parse(text);
+  // const property = msg.property
+  // const attributeValue = msg.attributeValue
+  // console.log(property);
+  // console.log(attributeValue);
+  // var model = document.getElementById(senderId);
+  // model.object3D[property] = attributeValue
+  // model.setAttribute(property, attributeValue);
+  // var camera = document.getElementById('camera');
+  // camera.setAttribute(property, attributeValue);
+
+  var msg = text.split("-");
+  const cmd = msg[0];
+  const state = msg[1];
+  if (cmd === 'rotation') {
+    console.log('cmd found')
+    var model = document.getElementById(senderId);
+    if (state === 'start'){
+      console.log(state + ' : state')
+      const direction = msg[2];
+      rotateModel(model, direction) 
+    } else if (state === 'end') {
+      console.log(state + ' : state')
+      modelRotation = msg[2];
+      model.object3D.rotation.y = modelRotation
+    }
+  }
 });
 
 // create RTC client 
@@ -411,6 +438,14 @@ function generateToken() {
   return null; // TODO: add a token generation
 }
 
+function rotateModel(model, direction) {
+  if (direction === 'positive') {
+    model.object3D.rotation.y += 0.1;
+  } else if (direction === 'negative') {
+    model.object3D.rotation.y -= 0.1;
+  }  
+}
+
 
 // UI
 function toggleBtn(btn){
@@ -503,13 +538,14 @@ function enableUiControls() {
         break;
       case "r":
         var model = document.getElementById(localStreams.uid)
-        model.object3D.rotation.y += 0.1;
+        rotateModel(model, 'positive')
         sendRotationAsChannelMessage('start', 'positive')
         break; 
       case "e":
         var model = document.getElementById(localStreams.uid)
-        model.object3D.rotation.y -= 0.1;
+        rotateModel(model, 'negative')
         sendRotationAsChannelMessage('start', 'negative')
+        
         break;    
       default:  // do nothing
     }
