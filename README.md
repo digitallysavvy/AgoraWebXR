@@ -6,7 +6,7 @@ Clone this repo
 
 ## (WebVR) Broadcaster ##
 1. Open `js/agora-broadcaster.js` and add your Agora AppID on line 2, `var agoraAppId = '';`
-2. Depoly to: localhost ([Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)/[Xampp](https://www.apachefriends.org/index.html)) with a tunnel out ([ngrok](https://ngrok.com)); or remote server
+2. Depoly to: [localhost](https://medium.com/r/?url=https%3A%2F%2Fdeveloper.mozilla.org%2Fen-US%2Fdocs%2FLearn%2FCommon_questions%2Fset_up_a_local_testing_server) - or use a plugin/app ([Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)/[Xampp](https://www.apachefriends.org/index.html)) with a tunnel out ([ngrok](https://ngrok.com)); or remote server
 3. Open your desktop browser and view the `broadcaster.html` page. (**Broadcaster**)
 
 ### (AR) Audience ###
@@ -22,7 +22,7 @@ To run this demo it is recommended to use a desktop or mobile device for either 
 
 ## Traditional Broadcaster ##
 To test the **Audience** with a traditional web broadcast ui:
-1. Visit [https://agora-group-video-chat.herokuapp.com](https://agora-group-video-chat.herokuapp.com) in your Desktop browser
+1. Visit [https://digitallysavvy.github.io/group-video-chat](https://digitallysavvy.github.io/group-video-chat) in your Desktop browser
 2. Input your Agora AppID
 3. Input the channel name `WebAR`
 
