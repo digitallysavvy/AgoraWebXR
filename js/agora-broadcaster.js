@@ -510,17 +510,6 @@ function enableUiControls() {
     leaveChannel(); 
   });
 
-  $("#start-RTMP-broadcast").click(() => {
-    startLiveTranscoding();
-    $('#addRtmpConfigModal').modal('toggle');
-    $('#rtmp-url').val('');
-  });
-
-  $("#add-external-stream").click(() => { 
-    addExternalSource();
-    $('#add-external-source-modal').modal('toggle');
-  });
-
   // keyboard listeners 
   $(document).keypress((e) => {
     switch (e.key) {
