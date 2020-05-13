@@ -22,7 +22,7 @@ To run this demo it is recommended to use a desktop or mobile device for either 
 
 ## Traditional Broadcaster ##
 To test the **Audience** with a traditional web broadcast ui:
-1. Visit [https://agora-group-video-chat.herokuapp.com](https://agora-group-video-chat.herokuapp.com) in your Desktop browser
+1. Visit [https://digitallysavvy.github.io/group-video-chat](https://digitallysavvy.github.io/group-video-chat) in your Desktop browser
 2. Input your Agora AppID
 3. Input the channel name `WebAR`
 
