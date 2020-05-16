@@ -1,8 +1,11 @@
 # Agora WebXR
 This is an example of using Agora's Video SDK with WebXR. In this demo you can broadcast yourself from a WebVR environment using [Agora Web SDK](https://docs.agora.io/en/Video/API%20Reference/web/index.html) with [AFrame](https://github.com/aframevr/aframe), or you can watch a live broadcaster in WebAR using [Agora Web SDK](https://docs.agora.io/en/Video/API%20Reference/web/index.html) with [AR.js](https://github.com/AR-js-org/AR.js) and [AFrame](https://github.com/aframevr/aframe). This project also implements the [Agora RTM SDK](https://docs.agora.io/en/Real-time-Messaging/API%20Reference/RTM_web/index.html) for the data messaging.
 
+Full tutorial: [Build a WebAR Live Video Streaming Web-App](https://medium.com/@hermes_11327/build-a-webar-live-video-streaming-web-app-e56196345d8c?source=friends_link&sk=59346a2fe8b6465ae0ad447d517355b2)
+
 ## Quick Start ##
-Clone this repo
+- Download or clone this repo. 
+- An [Agora.io developer account](https://sso.agora.io/en/signup/), and get your App ID in the [Projects section of your Agora Console](https://console.agora.io/projects).
 
 ## (WebVR) Broadcaster ##
 1. Open `js/agora-broadcaster.js` and add your Agora AppID on line 2, `var agoraAppId = '';`
@@ -27,4 +30,4 @@ To test the **Audience** with a traditional web broadcast ui:
 3. Input the channel name `WebAR`
 
 ## Experimental ##
-I am still working on the Image Tracking integration. Currently there is an issue with dynamically loading content when using Image markers. For more details see issue :[https://github.com/AR-js-org/AR.js/issues/91](https://github.com/AR-js-org/AR.js/issues/91)
+I am still working on the Image Tracking integration. Currently there is an issue with dynamically loading content when using Image markers. For more details see issue: [https://github.com/AR-js-org/AR.js/issues/91](https://github.com/AR-js-org/AR.js/issues/91)
